@@ -1,6 +1,13 @@
 const boardElement = document.querySelector(".board");
+
 const clearButtonElement = document.querySelector(".clear-button");
 clearButtonElement.addEventListener("click", clearCells);
+
+const MIN_BOARD_SIZE = 8;
+const MAX_BOARD_SIZE = 100;
+
+const resizeButtonElement = document.querySelector(".resize-button");
+resizeButtonElement.addEventListener("click", resizeBoard);
 
 function initBoard(size) {
     let cellSize = boardElement.clientWidth / size;
@@ -28,12 +35,27 @@ function initBoard(size) {
 function addHoverEventToCell(cell) {
     cell.addEventListener("mouseenter", (e) => {
         cell.classList.add("board-cell-filled");
+
+        let newCellOpacity = Math.min(Math.round((Number(cell.style.opacity) + 0.1) * 10) / 10, 1); 
+        console.log(newCellOpacity);
+        cell.style.opacity = newCellOpacity;
     });
 }
 
 function clearCells() {
     const boardCellElementList = document.querySelectorAll(".board-cell");
     boardCellElementList.forEach((cell) => cell.classList.remove("board-cell-filled"));
+}
+
+function resizeBoard() {
+    let newSize = 0;
+    
+    while (newSize < MIN_BOARD_SIZE || newSize > MAX_BOARD_SIZE) {
+        newSize = prompt(`Enter new board size (${MIN_BOARD_SIZE}-${MAX_BOARD_SIZE}): `);    
+    }
+
+    boardElement.textContent = "";
+    initBoard(newSize);
 }
 
 initBoard(16);

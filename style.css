@@ -26,18 +26,16 @@ body {
 }
 
 .content {
+    flex: 1;
     flex-direction: column;
+    gap: 2rem;
 }
 
 .board {
-    min-width: 400px;
-    max-width: 600px;
+    min-width: 500px;
     aspect-ratio: 1 / 1;
 
     border: 4px solid black;
-
-    display: flex;
-    flex-flow: row wrap;
 }
 
 .board-row {
@@ -51,4 +49,14 @@ body {
 
 .board-cell-filled {
     background-color: black;
+    opacity: 0;
+}
+
+.settings {
+    display: flex;
+    gap: 1rem;
+}
+
+button { 
+    padding: 4px 12px;
 }
